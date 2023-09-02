@@ -1,0 +1,19 @@
+---
+title: "Create New GitHub Repo from Template Repo"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Create New GitHub Repo from Template Repo}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(gitworkr)
+```
