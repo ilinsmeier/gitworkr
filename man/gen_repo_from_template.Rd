@@ -7,7 +7,7 @@
 gen_repo_from_template(
   repo_owner,
   repo_name,
-  repo_descr,
+  repo_descr = "",
   proj_dir,
   tmplt_owner,
   tmplt_repo
@@ -20,7 +20,8 @@ gen_repo_from_template(
 
 \item{repo_descr}{description for the new github repository.}
 
-\item{proj_dir}{target path to clone repo and initialize RStudio project.}
+\item{proj_dir}{target path for cloning repo and initializing RStudio
+project.}
 
 \item{tmplt_owner}{username associated with github template repository.}
 
@@ -28,21 +29,23 @@ gen_repo_from_template(
 }
 \value{
 list containing github API response object \code{gh_response} as well as
-the local path to the created RStudio project
+the local path to the new RStudio project
 }
 \description{
-Create new repository from GitHub template repo
+Create a new GitHub repository from a template repo, clone the new repo to
+your local machine, create an RStudio project for the cloned repository, and
+open the RStudio project in a separate R session.
 }
 \examples{
 \dontrun{
   ## create a new repo from a github template repository
   gen_repo_from_template(
-    repo_owner = "",
-    repo_name = "",
-    repo_descr = "",
-    proj_dir = "",
-    tmplt_owner = "",
-    tmplt_repo = ""
+    repo_owner = "ilinsmeier",
+    repo_name = "new-github-repo-from-template",
+    repo_descr = "This repository was created from a github template repo.",
+    proj_dir = "~/projects",
+    tmplt_owner = "ilinsmeier",
+    tmplt_repo = "bg-labs-r-project-template"
   )
 }
 
