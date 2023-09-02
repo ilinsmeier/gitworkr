@@ -5,8 +5,7 @@ Authors@R:
     person("Ian", "Linsmeier", , "ilinsmeier.dev@gmail.com", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0002-1568-7349"))
 Description: A simple R package for git + github workflow automation.
-License: `use_mit_license()`, `use_gpl3_license()` or friends to pick a
-    license
+License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.3
