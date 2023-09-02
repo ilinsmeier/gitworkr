@@ -1,11 +1,11 @@
 #'  Create new repository from GitHub template repo
 #'
-#' @param repo_owner
-#' @param repo_name
-#' @param repo_descr
-#' @param proj_dir
-#' @param tmplt_owner
-#' @param tmplt_repo
+#' @param repo_owner  github username (and owner of new repo).
+#' @param repo_name   name of new the github repository being created.
+#' @param repo_descr  description for the new github repository.
+#' @param proj_dir    target directory for the RStudio project.
+#' @param tmplt_owner username associated with github template repository.
+#' @param tmplt_repo  name of github template repository.
 #'
 #' @return
 #' @export
