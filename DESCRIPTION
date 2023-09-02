@@ -13,3 +13,7 @@ Suggests:
     knitr,
     rmarkdown
 VignetteBuilder: knitr
+Imports: 
+    gh,
+    glue,
+    usethis

@@ -1,21 +1,37 @@
-#'  Create new repository from GitHub template repo
+#' Create new repository from GitHub template repo
 #'
-#' @param repo_owner  github username (and owner of new repo).
+#' @param repo_owner  github username and owner of the new github repository.
 #' @param repo_name   name of new the github repository being created.
 #' @param repo_descr  description for the new github repository.
-#' @param proj_dir    target directory for the RStudio project.
+#' @param proj_dir    target path to clone repo and initialize RStudio project.
 #' @param tmplt_owner username associated with github template repository.
 #' @param tmplt_repo  name of github template repository.
 #'
-#' @return
+#' @return list containing github API response object `gh_response` as well as
+#'   the local path to the created RStudio project
 #' @export
 #'
 #' @examples
+#' \dontrun{
+#'   ## create a new repo from a github template repository
+#'   gen_repo_from_template(
+#'     repo_owner = "",
+#'     repo_name = "",
+#'     repo_descr = "",
+#'     proj_dir = "",
+#'     tmplt_owner = "",
+#'     tmplt_repo = ""
+#'   )
+#' }
+#'
+#' @importFrom gh gh
+#' @importFrom usethis create_from_github
+#' @importFrom glue glue
 gen_repo_from_template <- function(repo_owner, repo_name, repo_descr, proj_dir,
                                    tmplt_owner, tmplt_repo) {
 
   ## create repo from template using github api
-  gh::gh("POST /repos/{tmplt_owner}/{tmplt_repo}/generate",
+  gh_response <- gh::gh("POST /repos/{template_owner}/{template_repo}/generate",
          .accept = "application/vnd.github+json",
          template_owner = tmplt_owner,
          template_repo  = tmplt_repo,
@@ -25,9 +41,10 @@ gen_repo_from_template <- function(repo_owner, repo_name, repo_descr, proj_dir,
          include_all_branches = FALSE,
          private = TRUE
   )
+  # print(gh_response)
 
   ## clone new github repo & open as RStudio project in a new session
-  usethis::create_from_github(
+  rproj_res <- usethis::create_from_github(
     repo_spec = glue::glue("https://github.com/{repo_owner}/{repo_name}.git"),
     destdir = proj_dir,
     fork = FALSE,
@@ -35,5 +52,13 @@ gen_repo_from_template <- function(repo_owner, repo_name, repo_descr, proj_dir,
     open = TRUE,
     protocol = "https"
   )
+  # print(rproj_res)
 
+  # return(gh_response)
+
+  ## return github API response object & local path to created RStudio project
+  list(
+    gh_response = gh_response,
+    rproj_path  = rproj_res
+  )
 }
