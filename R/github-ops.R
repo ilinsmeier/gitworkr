@@ -58,7 +58,7 @@ gen_repo_from_template <- function(repo_owner,
     destdir = proj_dir,
     fork = FALSE,
     rstudio = TRUE,
-    open = TRUE,
+    open = FALSE,
     protocol = "https"
   )
 
