@@ -62,6 +62,18 @@ gen_repo_from_template <- function(repo_owner,
     protocol = "https"
   )
 
+  rproj_path <- file.path(proj_dir, repo_name)
+  stopifnot(dir.exists(rproj_path))
+
+  cur_rproj_file <- fs::path_filter(list.files(path = rproj_path, full.names = TRUE), regexp = "(?i)^.*\\.Rproj$", perl = TRUE)
+  new_rproj_file <- file.path(dirname(cur_rproj_file), glue::glue("{repo_name}.Rproj"))
+
+  file.rename(cur_rproj_file, new_rproj_file)
+
+
+  usethis::proj_activate(rproj_path)
+
+
   ## return github API response object & local path to created RStudio project
   list(
     gh_response = gh_response,
