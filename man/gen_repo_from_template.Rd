@@ -14,18 +14,20 @@ gen_repo_from_template(
 )
 }
 \arguments{
-\item{repo_owner}{github username and owner of the new github repository.}
+\item{repo_owner}{github username (string)}
 
-\item{repo_name}{name of new the github repository being created.}
+\item{repo_name}{name of the new the github repository being created
+(string).}
 
-\item{repo_descr}{description for the new github repository.}
+\item{repo_descr}{a description for the new github repository (string).}
 
-\item{proj_dir}{target path for cloning repo and initializing RStudio
-project.}
+\item{proj_dir}{target path to clone repository and initialize RStudio
+project (string).}
 
-\item{tmplt_owner}{username associated with github template repository.}
+\item{tmplt_owner}{username associated with github template repository
+(string).}
 
-\item{tmplt_repo}{name of github template repository.}
+\item{tmplt_repo}{name of github template repository (string).}
 }
 \value{
 list containing github API response object \code{gh_response} as well as
@@ -43,7 +45,7 @@ open the RStudio project in a separate R session.
     repo_owner = "ilinsmeier",
     repo_name = "new-github-repo-from-template",
     repo_descr = "This repository was created from a github template repo.",
-    proj_dir = "~/projects",
+    proj_dir = "C:/Users/ilinsmeier/projects",
     tmplt_owner = "ilinsmeier",
     tmplt_repo = "bg-labs-r-project-template"
   )

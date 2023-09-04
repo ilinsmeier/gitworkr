@@ -14,6 +14,7 @@ Suggests:
     rmarkdown
 VignetteBuilder: knitr
 Imports: 
+    fs,
     gh,
     glue,
     usethis
