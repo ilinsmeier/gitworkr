@@ -53,7 +53,8 @@ gen_repo_from_template <- function(repo_owner,
   )
 
   ## clone new github repo & open as RStudio project in a new session
-  rproj_res <- usethis::create_from_github(
+  rproj_path <- usethis::create_from_github(
+  # rproj_res <- usethis::create_from_github(
     repo_spec = glue::glue("https://github.com/{repo_owner}/{repo_name}.git"),
     destdir = proj_dir,
     fork = FALSE,
@@ -62,7 +63,7 @@ gen_repo_from_template <- function(repo_owner,
     protocol = "https"
   )
 
-  rproj_path <- file.path(proj_dir, repo_name)
+  # rproj_path <- file.path(proj_dir, repo_name)
   stopifnot(dir.exists(rproj_path))
 
   cur_rproj_file <- fs::path_filter(list.files(path = rproj_path, full.names = TRUE), regexp = "(?i)^.*\\.Rproj$", perl = TRUE)
@@ -77,6 +78,6 @@ gen_repo_from_template <- function(repo_owner,
   ## return github API response object & local path to created RStudio project
   list(
     gh_response = gh_response,
-    rproj_path  = rproj_res
+    rproj_path  = rproj_path
   )
 }
