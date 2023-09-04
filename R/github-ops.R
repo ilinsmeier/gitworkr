@@ -35,6 +35,7 @@
 #' @importFrom usethis create_from_github
 #' @importFrom glue glue
 #' @importFrom fs path_filter
+#' @importFrom rlang check_required
 gen_repo_from_template <- function(repo_owner,
                                    repo_name,
                                    repo_descr = "",
@@ -42,6 +43,12 @@ gen_repo_from_template <- function(repo_owner,
                                    tmplt_owner,
                                    tmplt_repo
                                    ) {
+  ## verify that required input args have been specified
+  rlang::check_required(repo_owner)
+  rlang::check_required(repo_name)
+  rlang::check_required(proj_dir)
+  rlang::check_required(tmplt_owner)
+  rlang::check_required(tmplt_repo)
 
   ## create repo from template using github api
   gh_response <- gh::gh("POST /repos/{template_owner}/{template_repo}/generate",
