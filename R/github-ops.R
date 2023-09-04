@@ -4,13 +4,15 @@
 #' your local machine, create an RStudio project for the cloned repository, and
 #' open the RStudio project in a separate R session.
 #'
-#' @param repo_owner  github username and owner of the new github repository.
-#' @param repo_name   name of new the github repository being created.
-#' @param repo_descr  description for the new github repository.
-#' @param proj_dir    target path for cloning repo and initializing RStudio
-#'   project.
-#' @param tmplt_owner username associated with github template repository.
-#' @param tmplt_repo  name of github template repository.
+#' @param repo_owner  github username (string)
+#' @param repo_name   name of the new the github repository being created
+#'   (string).
+#' @param repo_descr  a description for the new github repository (string).
+#' @param proj_dir    target path to clone repository and initialize RStudio
+#'   project (string).
+#' @param tmplt_owner username associated with github template repository
+#'   (string).
+#' @param tmplt_repo  name of github template repository (string).
 #'
 #' @return list containing github API response object `gh_response` as well as
 #'   the local path to the new RStudio project
@@ -23,7 +25,7 @@
 #'     repo_owner = "ilinsmeier",
 #'     repo_name = "new-github-repo-from-template",
 #'     repo_descr = "This repository was created from a github template repo.",
-#'     proj_dir = "~/projects",
+#'     proj_dir = "C:/Users/ilinsmeier/projects",
 #'     tmplt_owner = "ilinsmeier",
 #'     tmplt_repo = "bg-labs-r-project-template"
 #'   )
@@ -32,6 +34,7 @@
 #' @importFrom gh gh
 #' @importFrom usethis create_from_github
 #' @importFrom glue glue
+#' @importFrom fs path_filter
 gen_repo_from_template <- function(repo_owner,
                                    repo_name,
                                    repo_descr = "",
