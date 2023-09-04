@@ -34,7 +34,8 @@
 #' @importFrom gh gh
 #' @importFrom usethis create_from_github
 #' @importFrom glue glue
-#' @importFrom fs path_filter
+#' @importFrom fs path_abs path_dir path_file path_filter
+#' @importFrom rlang check_required
 gen_repo_from_template <- function(repo_owner,
                                    repo_name,
                                    repo_descr = "",
@@ -42,6 +43,20 @@ gen_repo_from_template <- function(repo_owner,
                                    tmplt_owner,
                                    tmplt_repo
                                    ) {
+  ## verify that required input args have been specified
+  rlang::check_required(repo_owner)
+  rlang::check_required(repo_name)
+  rlang::check_required(proj_dir)
+  rlang::check_required(tmplt_owner)
+  rlang::check_required(tmplt_repo)
+
+  ## check input path
+  error_msg <- paste0("target path `proj_dir = ", proj_dir, "` does not exist!")
+  if (!dir.exists(proj_dir)) stop(error_msg, call. = FALSE)
+  # proj_dir <- usethis:::user_path_prep(proj_dir)
+  # name <- fs::path_file(fs::path_abs(proj_dir))
+  # usethis:::challenge_nested_project(fs::path_dir(proj_dir), name)
+  # usethis:::challenge_home_directory(proj_dir)
 
   ## create repo from template using github api
   gh_response <- gh::gh("POST /repos/{template_owner}/{template_repo}/generate",
