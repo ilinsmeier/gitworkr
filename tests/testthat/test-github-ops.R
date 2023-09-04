@@ -41,12 +41,14 @@ test_that("error if missing required input args for `gen_repo_from_template()`",
 })
 
 test_that("invalid input args produce error for `gen_repo_from_template()`", {
-  # gen_repo_from_template(
-  #   repo_owner = "ilinsmeier",
-  #   repo_name = "new-github-repo-from-template",
-  #   repo_descr = "This repository was created from a github template repo.",
-  #   proj_dir = "C:/Users/ilinsmeier/projects",
-  #   tmplt_owner = "ilinsmeier",
-  #   tmplt_repo = "bg-labs-r-project-template"
-  # )
+
+  ## invalid `proj_dir`: path does not exist
+  expect_error(gen_repo_from_template(
+    repo_owner = "ilinsmeier",
+    repo_name = "new-github-repo-from-template",
+    repo_descr = "This repository was created from a github template repo.",
+    proj_dir = "C:/Users/ilinsmeier/projects",
+    tmplt_owner = "ilinsmeier",
+    tmplt_repo = "bg-labs-r-project-template"
+  ))
 })
