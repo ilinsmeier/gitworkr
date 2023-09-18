@@ -97,3 +97,27 @@ gen_repo_from_template <- function(repo_owner,
     rproj_path  = rproj_path
   )
 }
+
+new_gitworkr_proj <- function(path,
+                              repo_owner,
+                              repo_name,
+                              repo_descr,
+                              tmplt_owner,
+                              tmplt_repo, ...) {
+
+  # browser()
+
+  dots <- list(...)
+
+  # dir.create(path, recursive = TRUE, showWarnings = FALSE)
+
+  gen_repo_from_template(proj_dir = getwd(),
+  # gen_repo_from_template(proj_dir = file.path(getwd(), path),
+                         repo_owner = repo_owner,
+                         repo_name = repo_name,
+                         repo_descr = repo_descr,
+                         tmplt_owner = tmplt_owner,
+                         tmplt_repo = tmplt_repo)
+
+}
+

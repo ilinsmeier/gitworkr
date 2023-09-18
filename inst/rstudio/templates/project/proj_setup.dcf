@@ -1,0 +1,34 @@
+Binding: new_gitworkr_proj
+Title: New gitworkr Project
+OpenFiles: README.md
+
+Parameter: repo_owner
+Widget: TextInput
+Label: GitHub Username
+Default:
+Position: Left
+
+Parameter: repo_name
+Widget: TextInput
+Label: New Repository Name
+Default:
+Position: Left
+
+Parameter: repo_descr
+Widget: TextInput
+Label: Repository Description
+Default:
+Position: Left
+
+Parameter: tmplt_repo
+Widget: TextInput
+Label: Template GitHub Repository
+Default:
+Position: Right
+
+Parameter: tmplt_owner
+Widget: TextInput
+Label: Owner of Template GitHub Repository
+Default:
+Position: Right
+
