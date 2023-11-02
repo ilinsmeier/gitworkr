@@ -39,7 +39,6 @@
 #' @importFrom glue glue
 #' @importFrom fs path_abs path_dir path_file path_filter
 #' @importFrom rlang check_required
-#' @importFrom utils file.edit
 gen_repo_from_template <- function(repo_owner,
                                    repo_name,
                                    repo_descr = "",
@@ -100,7 +99,7 @@ gen_repo_from_template <- function(repo_owner,
     readne_text <- paste0("# ", repo_name, "\n", repo_descr, "\n")
     writeLines(readne_text, con = readme_path)
     ## open "README.md" for editing after opening new project in RStudio
-    on.exit(utils::file.edit(readme_path), add = TRUE)
+    # on.exit(utils::file.edit(readme_path), add = TRUE)
   }
 
   ## open RStudio project in new R session
