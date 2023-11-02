@@ -29,7 +29,8 @@
 #'     repo_descr = "This repository was created from a github template repo.",
 #'     proj_dir = "C:/Users/ilinsmeier/projects",
 #'     tmplt_owner = "ilinsmeier",
-#'     tmplt_repo = "bg-labs-r-project-template"
+#'     tmplt_repo = "bg-labs-r-project-template",
+#'     clean_readme = TRUE
 #'   )
 #' }
 #'
