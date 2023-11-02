@@ -13,6 +13,8 @@
 #' @param tmplt_owner username associated with github template repository
 #'   (string).
 #' @param tmplt_repo  name of github template repository (string).
+#' @param clean_readme create "README.md" or replace file contents (if it
+#'   already exists) with `repo_name` & `repo_descr` (logical, default = TRUE).
 #'
 #' @return list containing github API response object `gh_response` as well as
 #'   the local path to the new RStudio project
@@ -27,7 +29,8 @@
 #'     repo_descr = "This repository was created from a github template repo.",
 #'     proj_dir = "C:/Users/ilinsmeier/projects",
 #'     tmplt_owner = "ilinsmeier",
-#'     tmplt_repo = "bg-labs-r-project-template"
+#'     tmplt_repo = "bg-labs-r-project-template",
+#'     clean_readme = TRUE
 #'   )
 #' }
 #'
@@ -41,7 +44,8 @@ gen_repo_from_template <- function(repo_owner,
                                    repo_descr = "",
                                    proj_dir,
                                    tmplt_owner,
-                                   tmplt_repo
+                                   tmplt_repo,
+                                   clean_readme = TRUE
                                    ) {
   ## verify that required input args have been specified
   rlang::check_required(repo_owner)
@@ -87,6 +91,16 @@ gen_repo_from_template <- function(repo_owner,
   cur_rproj_file <- fs::path_filter(list.files(path = rproj_path, full.names = TRUE), regexp = "(?i)^.*\\.Rproj$", perl = TRUE)
   new_rproj_file <- file.path(dirname(cur_rproj_file), glue::glue("{repo_name}.Rproj"))
   file.rename(cur_rproj_file, new_rproj_file)
+
+  ## TODO: clean template repository "README.md"
+  if (isTRUE(clean_readme)) {
+    # readme_path <- list.files(path = rproj_path, pattern = "(?i)^README\\.md$", full.names = TRUE)
+    readme_path <- file.path(rproj_path, "README.md")
+    readne_text <- paste0("# ", repo_name, "\n", repo_descr, "\n")
+    writeLines(readne_text, con = readme_path)
+    ## open "README.md" for editing after opening new project in RStudio
+    # on.exit(utils::file.edit(readme_path), add = TRUE)
+  }
 
   ## open RStudio project in new R session
   usethis::proj_activate(rproj_path)
