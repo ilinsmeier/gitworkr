@@ -10,7 +10,8 @@ gen_repo_from_template(
   repo_descr = "",
   proj_dir,
   tmplt_owner,
-  tmplt_repo
+  tmplt_repo,
+  clean_readme = TRUE
 )
 }
 \arguments{
@@ -28,6 +29,9 @@ project (string).}
 (string).}
 
 \item{tmplt_repo}{name of github template repository (string).}
+
+\item{clean_readme}{create "README.md" or replace file contents (if it
+already exists) with \code{repo_name} & \code{repo_descr} (logical, default = TRUE).}
 }
 \value{
 list containing github API response object \code{gh_response} as well as
@@ -47,7 +51,8 @@ open the RStudio project in a separate R session.
     repo_descr = "This repository was created from a github template repo.",
     proj_dir = "C:/Users/ilinsmeier/projects",
     tmplt_owner = "ilinsmeier",
-    tmplt_repo = "bg-labs-r-project-template"
+    tmplt_repo = "bg-labs-r-project-template",
+    clean_readme = TRUE
   )
 }
 
