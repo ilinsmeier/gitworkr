@@ -3,7 +3,7 @@ A simple R package for git + github workflow automation.
 
 ## Installation
 
-```{r}
+```r
 ## uncomment line below to install {remotes} package (if not already installed)
 # install.packages("remotes")
 
