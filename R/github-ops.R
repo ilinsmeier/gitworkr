@@ -83,7 +83,7 @@ gen_repo_from_template <- function(repo_owner,
         repo_info <- gh::gh(
           "/repos/{owner}/{repo}",
           owner = repo_owner,
-          repo = repo_name,
+          repo = repo_name
         )
         TRUE
       },
