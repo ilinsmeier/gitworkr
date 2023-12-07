@@ -74,6 +74,27 @@ gen_repo_from_template <- function(repo_owner,
          private = TRUE
   )
 
+
+  ## wait for repo to initialize before cloning repo locally
+  repo_not_setup <- TRUE
+  while (repo_not_setup) {
+    repo_found <- tryCatch(
+      {
+        repo_info <- gh::gh(
+          "/repos/{owner}/{repo}",
+          owner = repo_owner,
+          repo = repo_name
+        )
+        TRUE
+      },
+      "http_error_404" = function(err) FALSE
+    )
+    repo_not_setup <- !repo_found
+    if (repo_not_setup) {
+      Sys.sleep(0.5)
+    }
+  }
+
   ## clone new github repo & open as RStudio project in a new session
   rproj_path <- usethis::create_from_github(
     repo_spec = glue::glue("https://github.com/{repo_owner}/{repo_name}.git"),
