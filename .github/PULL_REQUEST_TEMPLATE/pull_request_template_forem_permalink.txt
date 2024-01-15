@@ -1,0 +1,1 @@
+https://github.com/forem/forem/blob/5c69c9fa2b6926a335140db07e89e97a8513c7e1/.github/PULL_REQUEST_TEMPLATE.md
