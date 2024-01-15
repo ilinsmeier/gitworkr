@@ -19,7 +19,7 @@ create_gh_pull_request <- function(
   gh_pr_query_string <- glue::glue("{repo_url}/compare/{target_branch}...{source_branch}?quick_pull=1")
 
   if (!is.null(pr_template)) {
-    gh_pr_query_string <- paste0(gh_pr_query_string, "template=", pr_template)
+    gh_pr_query_string <- paste0(gh_pr_query_string, "&template=", pr_template)
   }
 
   browseURL(gh_pr_query_string)
