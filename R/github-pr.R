@@ -18,15 +18,9 @@
 create_gh_pull_request <- function(
     source_branch = gert::git_branch(),
     target_branch = "main",
-    # repo_url = get_remote_repo_url(),
     repo_url = gitworkr::get_remote_repo_url(),
     pr_template = NULL
 ) {
-
-  # gh_pr_query_string_example <- "https://github.com/octo-org/octo-repo/compare/main...my-branch?quick_pull=1"
-  # remote_list <- gert::git_remote_list(repo = ".")
-  # origin_url <- remote_list[remote_list$name %in% "origin"]$url[1]
-  # # origin_url <- remote_list |> dplyr::filter(name %in% "origin") |> dplyr::pull(url)
 
   #############################################################################|
   ## PR query string docs: https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/using-query-parameters-to-create-a-pull-request
@@ -41,6 +35,7 @@ create_gh_pull_request <- function(
     gh_pr_query_string <- paste0(gh_pr_query_string, "&template=", pr_template_file)
   }
 
+  ## open new pull request in the browser
   browseURL(gh_pr_query_string)
 
   return(gh_pr_query_string)
