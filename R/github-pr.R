@@ -7,14 +7,22 @@
 #' @param repo_url The GitHub repository URL where the Pull Request (PR) will be
 #'   created. By default, `gitworkr::get_remote_repo_url()` is used to parse the
 #'   URL of the remote "origin".
-#' @param pr_template Optional name of a pull request template file located in
-#'   the subdirectory ".github/PULL_REQUEST_TEMPLATE/" or
-#'   "docs/PULL_REQUEST_TEMPLATE/" of the repo specified by `repo_url`. Default
-#'   `NULL` means that no pull request template is used when creating the new
-#'   PR. For more information, see the [GitHub Docs for creating PR
+#' @param pr_template The name of a pull request template file located in the
+#'   repo specified by `repo_url`. Default `NULL` means that no pull request
+#'   template is used when creating the PR.
+#'
+#'   Note, the pull request template file must be saved in one of the following
+#'   subdirectories:
+#'
+#'   * ".github/PULL_REQUEST_TEMPLATE/"
+#'   * "docs/PULL_REQUEST_TEMPLATE/"
+#'
+#'   For more information, see the [GitHub Docs for creating PR
 #'   templates](https://docs.github.com/en/communities/using-templates-to-encourage-useful-issues-and-pull-requests/creating-a-pull-request-template-for-your-repository).
 #'
-#' @return
+#' @return The URL used to create the pull request on GitHub, which is opened in
+#'   the browser after running this function.
+#' @seealso [get_remote_repo_url()]
 #' @export
 #'
 #' @examples
@@ -44,7 +52,7 @@ create_gh_pull_request <- function(
   return(gh_pr_query_string)
 }
 
-#' Remote Repository URL
+#' Remote Origin Repo URL
 #'
 #' @return
 #' @export

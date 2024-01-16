@@ -2,10 +2,10 @@
 % Please edit documentation in R/github-pr.R
 \name{get_remote_repo_url}
 \alias{get_remote_repo_url}
-\title{Remote Repository URL}
+\title{Remote Origin Repo URL}
 \usage{
 get_remote_repo_url()
 }
 \description{
-Remote Repository URL
+Remote Origin Repo URL
 }

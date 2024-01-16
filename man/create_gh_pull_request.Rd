@@ -22,12 +22,26 @@ into the \code{target_branch}. The current branch is used by default.}
 created. By default, \code{gitworkr::get_remote_repo_url()} is used to parse the
 URL of the remote "origin".}
 
-\item{pr_template}{Optional name of a pull request template file located in
-the subdirectory ".github/PULL_REQUEST_TEMPLATE/" or
-"docs/PULL_REQUEST_TEMPLATE/" of the repo specified by \code{repo_url}. Default
-\code{NULL} means that no pull request template is used when creating the new
-PR. For more information, see the \href{https://docs.github.com/en/communities/using-templates-to-encourage-useful-issues-and-pull-requests/creating-a-pull-request-template-for-your-repository}{GitHub Docs for creating PR templates}.}
+\item{pr_template}{The name of a pull request template file located in the
+repo specified by \code{repo_url}. Default \code{NULL} means that no pull request
+template is used when creating the PR.
+
+Note, the pull request template file must be saved in one of the following
+subdirectories:
+\itemize{
+\item ".github/PULL_REQUEST_TEMPLATE/"
+\item "docs/PULL_REQUEST_TEMPLATE/"
+}
+
+For more information, see the \href{https://docs.github.com/en/communities/using-templates-to-encourage-useful-issues-and-pull-requests/creating-a-pull-request-template-for-your-repository}{GitHub Docs for creating PR templates}.}
+}
+\value{
+The URL used to create the pull request on GitHub, which is opened in
+the browser after running this function.
 }
 \description{
 Create GitHub Pull Request
+}
+\seealso{
+\code{\link[=get_remote_repo_url]{get_remote_repo_url()}}
 }
