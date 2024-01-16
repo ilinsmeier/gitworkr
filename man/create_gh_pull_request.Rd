@@ -18,13 +18,15 @@ into the \code{target_branch}. The current branch is used by default.}
 \item{target_branch}{The name of the receiving branch, which is typically the
 "main" (default) branch.}
 
-\item{repo_url}{The GitHub repository URL where the Pull Request will be
+\item{repo_url}{The GitHub repository URL where the Pull Request (PR) will be
 created. By default, \code{gitworkr::get_remote_repo_url()} is used to parse the
 URL of the remote "origin".}
 
-\item{pr_template}{The name of a pull request template file located in the
-subdirectory ".github/PULL_REQUEST_TEMPLATE/" or
-"docs/PULL_REQUEST_TEMPLATE/" of the repo specified in \code{repo_url}.}
+\item{pr_template}{Optional name of a pull request template file located in
+the subdirectory ".github/PULL_REQUEST_TEMPLATE/" or
+"docs/PULL_REQUEST_TEMPLATE/" of the repo specified by \code{repo_url}. Default
+\code{NULL} means that no pull request template is used when creating the new
+PR. For more information, see the \href{https://docs.github.com/en/communities/using-templates-to-encourage-useful-issues-and-pull-requests/creating-a-pull-request-template-for-your-repository}{GitHub Docs for creating PR templates}.}
 }
 \description{
 Create GitHub Pull Request
