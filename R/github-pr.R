@@ -1,7 +1,25 @@
+#' Create GitHub Pull Request
+#'
+#' @param source_branch The name of the branch containing changes to be merged
+#'   into the `target_branch`. The current branch is used by default.
+#' @param target_branch The name of the receiving branch, which is typically the
+#'   "main" (default) branch.
+#' @param repo_url The GitHub repository URL where the Pull Request will be
+#'   created. By default, `gitworkr::get_remote_repo_url()` is used to parse the
+#'   URL of the remote "origin".
+#' @param pr_template The name of a pull request template file located in the
+#'   subdirectory ".github/PULL_REQUEST_TEMPLATE/" or
+#'   "docs/PULL_REQUEST_TEMPLATE/" of the repo specified in `repo_url`.
+#'
+#' @return
+#' @export
+#'
+#' @examples
 create_gh_pull_request <- function(
     source_branch = gert::git_branch(),
     target_branch = "main",
-    repo_url = get_remote_repo_url(),
+    # repo_url = get_remote_repo_url(),
+    repo_url = gitworkr::get_remote_repo_url(),
     pr_template = NULL
 ) {
 
@@ -28,6 +46,12 @@ create_gh_pull_request <- function(
   return(gh_pr_query_string)
 }
 
+#' Remote Repository URL
+#'
+#' @return
+#' @export
+#'
+#' @examples
 get_remote_repo_url <- function() {
   remote_list <- gert::git_remote_list(repo = ".")
   origin_repo <- remote_list[remote_list$name %in% "origin"]$url[1]
