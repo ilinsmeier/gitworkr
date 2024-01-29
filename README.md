@@ -10,3 +10,4 @@ A simple R package for git + github workflow automation.
 ## install {gitworkr}
 remotes::install_github("ilinsmeier/gitworkr", force = TRUE)
 ```
+
