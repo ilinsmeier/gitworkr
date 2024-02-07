@@ -74,24 +74,34 @@ gen_repo_from_template <- function(repo_owner,
          private = TRUE
   )
 
-
-  ## wait for repo to initialize before cloning repo locally
+  ## wait for initial commit in github repo before cloning the repo locally
   repo_not_setup <- TRUE
+  counter <- 0    ## counter for tracking the number of repo queries
+  msg_print <- 3  ## iterations before printing github API error messages
   while (repo_not_setup) {
-    repo_found <- tryCatch(
-      {
-        repo_info <- gh::gh(
-          "/repos/{owner}/{repo}",
-          owner = repo_owner,
-          repo = repo_name
-        )
-        TRUE
-      },
-      "http_error_404" = function(err) FALSE
-    )
-    repo_not_setup <- !repo_found
+    counter <- counter + 1
+    gh_repo_commits <- NULL
+    gh_repo_connected <- tryCatch({
+      gh_repo_commits <- gh::gh(
+        "GET /repos/{owner}/{repo}/commits",
+        .accept = "application/vnd.github+json",
+        owner = repo_owner,
+        repo = repo_name,
+        .limit = Inf)
+      TRUE
+    },
+    error = function(e) {
+      if (counter %% msg_print %in% 0) {
+        message(glue::glue("Waiting for GitHub repo intial commit:  https://github.com/{repo_owner}/{repo_name}"))
+        message(conditionMessage(e))
+        message("Rechecking repo...\n")
+      }
+      ## Choose a return value in case of error
+      return(FALSE)
+    })
+    repo_not_setup <- !gh_repo_connected
     if (repo_not_setup) {
-      Sys.sleep(0.5)
+      Sys.sleep(1)  ## give github a moment to initialize the new repository
     }
   }
 
