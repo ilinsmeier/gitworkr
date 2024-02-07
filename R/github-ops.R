@@ -74,6 +74,8 @@ gen_repo_from_template <- function(repo_owner,
          private = TRUE
   )
 
+  ## give github a moment to initialize the new repository
+  Sys.sleep(1)
 
   ## wait until repo has initial commit before cloning the repo locally
   repo_not_setup <- TRUE
@@ -89,14 +91,16 @@ gen_repo_from_template <- function(repo_owner,
       TRUE
     },
     error = function(e) {
-      message(glue::glue("Unable to connect to GitHub repo:  https://github.com/{repo_owner}/{repo_name}"))
+      message(glue::glue("Waiting for intial commit in the GitHub repo:  https://github.com/{repo_owner}/{repo_name}"))
+      # message(glue::glue("Unable to connect to GitHub repo:  https://github.com/{repo_owner}/{repo_name}"))
       message(conditionMessage(e))
       ## Choose a return value in case of error
       return(FALSE)
     })
     repo_not_setup <- !gh_repo_connected
     if (repo_not_setup) {
-      message("Attempting to reconnect...\n")
+      message("Rechecking repo for initial commit...\n")
+      # message("Attempting to reconnect...\n")
       Sys.sleep(1)
     }
   }
