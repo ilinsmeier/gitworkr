@@ -76,9 +76,8 @@ gen_repo_from_template <- function(repo_owner,
 
   ## wait for initial commit in github repo before cloning the repo locally
   repo_not_setup <- TRUE
-  counter <- 0   ## counter for tracking the number of repo queries
-  msg_print <- 2
-  # msg_print <- 3
+  counter <- 0    ## counter for tracking the number of repo queries
+  msg_print <- 3  ## iterations before printing github API error messages
   while (repo_not_setup) {
     counter <- counter + 1
     gh_repo_commits <- NULL
