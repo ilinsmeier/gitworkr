@@ -75,23 +75,29 @@ gen_repo_from_template <- function(repo_owner,
   )
 
 
-  ## wait for repo to initialize before cloning repo locally
+  ## wait until repo has initial commit before cloning the repo locally
   repo_not_setup <- TRUE
   while (repo_not_setup) {
-    repo_found <- tryCatch(
-      {
-        repo_info <- gh::gh(
-          "/repos/{owner}/{repo}",
-          owner = repo_owner,
-          repo = repo_name
-        )
-        TRUE
-      },
-      "http_error_404" = function(err) FALSE
-    )
-    repo_not_setup <- !repo_found
+    gh_repo_commits <- NULL
+    gh_repo_connected <- tryCatch({
+      gh_repo_commits <- gh::gh(
+        "GET /repos/{owner}/{repo}/commits",
+        .accept = "application/vnd.github+json",
+        owner = repo_owner,
+        repo = repo_name,
+        .limit = Inf)
+      TRUE
+    },
+    error = function(e) {
+      message(glue::glue("Unable to connect to GitHub repo:  https://github.com/{repo_owner}/{repo_name}"))
+      message(conditionMessage(e))
+      ## Choose a return value in case of error
+      return(FALSE)
+    })
+    repo_not_setup <- !gh_repo_connected
     if (repo_not_setup) {
-      Sys.sleep(0.5)
+      message("Attempting to reconnect...\n")
+      Sys.sleep(1)
     }
   }
 
