@@ -8,5 +8,5 @@ A simple R package for git + github workflow automation.
 # install.packages("remotes")
 
 ## install {gitworkr}
-remotes::install_github("ilinsmeier/gitworkr", force = TRUE)
+remotes::install_github("ilinsmeier/gitworkr")
 ```
